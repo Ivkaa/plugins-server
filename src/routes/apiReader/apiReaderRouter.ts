@@ -10,7 +10,7 @@ import { handleServiceResponse } from '@/common/utils/httpHandlers';
 import { ApiReaderRequestParamSchema, ApiReaderResponseSchema } from './apiReaderModel';
 
 export const articleReaderRegistry = new OpenAPIRegistry();
-articleReaderRegistry.register('Web Page Reader', ApiReaderResponseSchema);
+articleReaderRegistry.register('Api Reader', ApiReaderResponseSchema);
 
 const parseJsonIfPossible = (jsonString: string) => {
   try {
@@ -32,20 +32,20 @@ const fetchAndCleanContent = async (url: string, method: 'get' | 'post', body?: 
   }
 };
 
-export const webPageReaderRouter: Router = (() => {
+export const apiReaderRouter: Router = (() => {
   const router = express.Router();
 
   articleReaderRegistry.registerPath({
     method: 'get',
-    path: '/web-page-reader/get-api-response',
-    tags: ['Web Page Reader'],
+    path: '/api-reader/get-content',
+    tags: ['Api Reader'],
     request: {
       query: ApiReaderRequestParamSchema,
     },
     responses: createApiResponse(ApiReaderResponseSchema, 'Success'),
   });
 
-  router.get('/get-api-response', async (_req: Request, res: Response) => {
+  router.get('/get-content', async (_req: Request, res: Response) => {
     const { url, method, body } = _req.query;
 
     if (typeof url !== 'string') {

@@ -10,6 +10,7 @@ import rateLimiter from '@/common/middleware/rateLimiter';
 import requestLogger from '@/common/middleware/requestLogger';
 import { healthCheckRouter } from '@/routes/healthCheck/healthCheckRouter';
 
+import { apiReaderRouter } from './routes/apiReader/apiReaderRouter';
 import { powerpointGeneratorRouter } from './routes/powerpointGenerator/powerpointGeneratorRouter';
 import { webPageReaderRouter } from './routes/webPageReader/webPageReaderRouter';
 import { wordGeneratorRouter } from './routes/wordGenerator/wordGeneratorRouter';
@@ -38,6 +39,7 @@ app.use('/health-check', healthCheckRouter);
 app.use('/images', express.static('public/images'));
 app.use('/youtube-transcript', youtubeTranscriptRouter);
 app.use('/web-page-reader', webPageReaderRouter);
+app.use('/api-reader', apiReaderRouter);
 app.use('/powerpoint-generator', powerpointGeneratorRouter);
 app.use('/word-generator', wordGeneratorRouter);
 // Swagger UI
