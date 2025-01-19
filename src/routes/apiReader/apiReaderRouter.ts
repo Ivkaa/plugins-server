@@ -22,7 +22,8 @@ const parseJsonIfPossible = (jsonString: string) => {
 
 const fetchAndCleanContent = async (url: string, method: 'get' | 'post', body?: string) => {
   try {
-    const response = await got(url, { method, body });
+    const apiReqBody = body ? JSON.stringify(parseJsonIfPossible(body)) : undefined;
+    const response = await got(url, { method, body: apiReqBody });
     const bodyParsed = parseJsonIfPossible(response.body);
 
     return { content: bodyParsed, status: response.statusCode };
